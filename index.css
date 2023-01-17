@@ -1,0 +1,54 @@
+.mainContainer {
+    width: 700px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-rows: auto;
+    grid-template-columns: 3fr 6fr;
+    grid-template-rows: 80px 40px repeat(12, 40px);
+}
+
+.cover {
+    width: 700px;
+    padding: 10px;
+    border: 2px solid rebeccapurple;
+    text-align: center;
+    grid-area: 1/1/1/3;
+}
+
+.buttons {
+    margin:0;
+    border: 2px solid rebeccapurple;
+    grid-area: 2/1/2/3;
+    display: grid;
+    grid-template-columns: repeat(6,1fr);
+}
+
+.menuButton{
+    padding: 3px 0 1px 0;
+    margin:0;
+    border: 2px solid rebeccapurple;
+    text-align: center;
+}
+
+.menuButton:hover{
+    background-color: rgba(102, 51, 153, 0.297);
+}
+
+.list {
+    display: grid;
+}
+
+.listObject {
+    border: 1px solid rebeccapurple;
+    padding: 10px;
+}
+
+.listObjectDescription {
+    border: 2px solid rebeccapurple;
+    padding: 10px;
+    grid-area: 3/2/6/3;
+}
+
+.listObject:hover {
+    background-color: rgba(102, 51, 153, 0.297);
+}
