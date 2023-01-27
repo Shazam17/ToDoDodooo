@@ -2,15 +2,36 @@ const requestURL = "https://dummyjson.com/products";
 
 function request() {
     let dataBase = sendRequest('GET', requestURL);
+
     dataBase.then(data => {
         console.log(data.products[0].title)
-
-
-
+        const title = [];
+        for(let i = 0;i<10;i++){
+            title[i] = data.products[i].title; 
+            console.log(data.products[i].title);
+        }
+        startAddListItem(title);
         dataBase.catch(err => console.log(err))
     })
 }
+request();
 
+function addRequest() {
+    let dataBase = sendRequest('GET', requestURL);
+    let Quantity = document.getElementById('Quant').value;
+    if(Quantity>30) {alert("Let me number lower than 30")}
+    else{
+    dataBase.then(data => {
+        console.log(data.products[0].title)
+        const title = [];
+        for(let i = 0;i<Quantity;i++){
+            title[i] = data.products[i].title; 
+            console.log(data.products[i].title);
+        }
+        addListItem(title,Quantity);
+        dataBase.catch(err => console.log(err))
+    })}
+}
 
 function sendRequest(method, url, body = null) {
     return fetch(url).then(response => {
@@ -28,32 +49,30 @@ function rechangeItem() {
     document.getElementById('Description').style.gridArea = '3/2/6/3';
 }
 
-function startAddListItem() {
+function startAddListItem(title) {
     removeListItems();
     for (let j = 0; j < 10; j++) {
         let targetDiv = document.querySelector(".list");
         let newDiv = document.createElement("div");
         newDiv.className = 'listObject';
         newDiv.onmouseover = () => changeItem(j + 1);
-        newDiv.onmouseout = () => rechangeItem(j + 1);
+        // newDiv.onmouseout = () => rechangeItem(j + 1);
         newDiv.draggable = 'true';
-        newDiv.innerHTML = '<a>New link</a>';
+        newDiv.innerHTML = '<a>'+title[j]+'</a>';
         targetDiv.append(newDiv);
     }
 }
-startAddListItem();
 
-function addListItem() {
+function addListItem(title,Quantity) {
     removeListItems();
-    let Quantity = document.getElementById('Quant').value;
     for (let i = 0; i < Quantity; i++) {
         let targetDiv = document.querySelector(".list");
         let newDiv = document.createElement("div");
         newDiv.className = 'listObject';
         newDiv.onmouseover = () => changeItem(i + 1);
-        newDiv.onmouseout = () => rechangeItem(i + 1);
+        // newDiv.onmouseout = () => rechangeItem(i + 1);
         newDiv.draggable = 'true';
-        newDiv.innerHTML = '<a>New link</a>';
+        newDiv.innerHTML = '<a>'+title[i]+'</a>';
         targetDiv.append(newDiv);
     }
 }
