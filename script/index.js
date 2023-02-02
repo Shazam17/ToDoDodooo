@@ -33,6 +33,52 @@ function addRequest() {
     })}
 }
 
+function addRequestDescription(n) {
+    let dataBase = sendRequest('GET', requestURL);
+    let Quantity = document.getElementById('Quant').value;
+    dataBase.then(data => {
+        console.log(data.products[0].title)
+        const id = [];
+        const title = [];
+        const description = [];
+        const price = [];
+        const discountPercentage = [];
+        const rating = [];
+        const stock = [];
+        const brand = [];
+        const category = [];
+        const images = [];n
+            id[n] = data.products[n].id;
+            title[n] = data.products[n].title; 
+            description[n] = data.products[n].description;
+            price[n] = data.products[n].price;
+            discountPercentage[n] = data.products[n].discountPercentage;
+            rating[n] = data.products[n].rating;
+            stock[n] = data.products[n].stock;
+            brand[n] = data.products[n].brand;
+            category[n] = data.products[n].category;
+            images[n] = data.products[n].images;
+            console.log(images[n][1]);
+                
+        let removeDiv = document.querySelectorAll(".listObjectDescription");
+        for (let k = removeDiv.length; k>0;k--) {
+            removeDiv[k-1].remove();
+        }
+        
+            let targetDiv = document.querySelector(".mainContainer");
+            let newDiv = document.createElement("div");
+            newDiv.className = 'listObjectDescription';
+            newDiv.id = 'Description';
+            newDiv.innerHTML = ' <img src="'+images[n][0]+'" id="big"> <div id="thumbs"> <a href="'+images[n][0]+'"> <img src="'+images[n][0]+'"> </a> <a href="'+images[n][1]+'"> <img src="'+images[n][1]+'"> </a> <a href="'+images[n][2]+'"> <img src="'+images[n][2]+'"> <a href="'+images[n][3]+'"> <img src="'+images[n][3]+'"> <a href="'+images[n][4]+'"> <img src="'+images[n][4]+'"> </a> </div> <div class="mainDescriptionInfo"> <div class="" id="">id: '+id[n]+'</div> <div class="" id="">title: '+title[n]+'</div> <div class="" id="">description: "'+description[n]+'"</div> <div class="" id="">price: '+price[n]+'</div> <div class="" id="">discountPercentage: '+discountPercentage[n]+'</div> <div class="" id="">rating: '+rating[n]+'</div> <div class="" id="">stock: '+stock[n]+'</div> <div class="" id="">brand: "'+brand[n]+'"</div> <div class="" id="">category: "'+category[n]+'"</div> </div>';
+            targetDiv.append(newDiv);
+            
+            changeItem(n+1);
+
+        dataBase.catch(err => console.log(err))
+    })
+}
+
+
 function sendRequest(method, url, body = null) {
     return fetch(url).then(response => {
         return response.json()
@@ -42,6 +88,7 @@ function sendRequest(method, url, body = null) {
 function changeItem(h) {
     document.getElementById('Description').style.backgroundColor = "rgba(102, 51, 153, 0.297)";
     document.getElementById('Description').style.gridArea = h + 2 + '/2/' + (h + 11) + '/3';
+    
 }
 
 function rechangeItem() {
@@ -55,7 +102,7 @@ function startAddListItem(title) {
         let targetDiv = document.querySelector(".list");
         let newDiv = document.createElement("div");
         newDiv.className = 'listObject';
-        newDiv.onmouseover = () => changeItem(j + 1);
+        newDiv.onmouseover = () => addRequestDescription(j);
         // newDiv.onmouseout = () => rechangeItem(j + 1);
         newDiv.draggable = 'true';
         newDiv.innerHTML = '<a>'+title[j]+'</a>';
@@ -69,7 +116,9 @@ function addListItem(title,Quantity) {
         let targetDiv = document.querySelector(".list");
         let newDiv = document.createElement("div");
         newDiv.className = 'listObject';
-        newDiv.onmouseover = () => changeItem(i + 1);
+        newDiv.onmouseover = () => addRequestDescription(i);
+
+
         // newDiv.onmouseout = () => rechangeItem(i + 1);
         newDiv.draggable = 'true';
         newDiv.innerHTML = '<a>'+title[i]+'</a>';
@@ -77,17 +126,6 @@ function addListItem(title,Quantity) {
     }
 }
 
-function addListDescription(title,Quantity) {
-        let targetDiv = document.querySelector(".listObjectDescription");
-        let newDiv = document.createElement("div");
-        newDiv.className = 'listObject';
-        newDiv.onmouseover = () => changeItem(i + 1);
-        // newDiv.onmouseout = () => rechangeItem(i + 1);
-        newDiv.draggable = 'true';
-        newDiv.innerHTML = '<div class="listObjectDescription" id="Description"> <img src="https://i.dummyjson.com/data/products/26/1.jpg" id="big"> <div id="thumbs"> <a href="https://i.dummyjson.com/data/products/26/1.jpg"> <img src="https://i.dummyjson.com/data/products/26/1.jpg"> </a> <a href="https://i.dummyjson.com/data/products/26/2.jpg"> <img src="https://i.dummyjson.com/data/products/26/2.jpg"> </a> <a href="https://i.dummyjson.com/data/products/26/3.jpg"> <img src="https://i.dummyjson.com/data/products/26/3.jpg"> <a href="https://i.dummyjson.com/data/products/26/4.jpg"> <img src="https://i.dummyjson.com/data/products/26/4.jpg"> <a href="https://i.dummyjson.com/data/products/26/5.jpg"> <img src="https://i.dummyjson.com/data/products/26/5.jpg"> </a> </div> <div class="mainDescriptionInfo"> <div class="" id="">id: 26</div> <div class="" id="">title: "Plant Hanger For Home"</div> <div class="" id="">description: "Boho Decor Plant Hanger For Home Wall Decoration Macrame Wall Hanging Shelf"</div> <div class="" id="">price: 41</div> <div class="" id="">discountPercentage: 17.86</div> <div class="" id="">rating: 4.08</div> <div class="" id="">stock: 131</div> <div class="" id="">brand: "Boho Decor"</div> <div class="" id="">category: "home-decoration"</div> </div> </div>';
-        targetDiv.append(newDiv);
-    }
-}
 
 
 
@@ -134,17 +172,6 @@ for (var i = 0; i < thumbs.length; i++) {
     });
 }
 
-
-
-
-
-
-
-
-
-
-
-
 // function upper(e) {
 //     console.log(e);
 //     const a = e.parentElement.previousSibling;
@@ -165,11 +192,6 @@ for (var i = 0; i < thumbs.length; i++) {
 //     const remm = e.parentElement;
 //     remm.remove();
 // }
-
-
-
-
-
 
 // function createNode(element) {
 //     return document.createElement(element);
