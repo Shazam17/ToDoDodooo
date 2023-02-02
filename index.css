@@ -58,12 +58,41 @@
 }
 
 .listObjectDescription {
+    display: grid;
+    grid-template-columns: repeat(8,1fr);
+    grid-template-rows: repeat(8, 40px);
     border: 3px solid rebeccapurple;
-    padding: 10px;
+    padding: 15px;
+    grid-area: 3/2/12/3;
+    font-size: smaller;
     
-    grid-area: 3/2/6/3;
 }
 
 .listObject:hover {
     background-color: rgba(102, 51, 153, 0.297);
+}
+.imgContainer{
+    display: grid;
+}
+.mainDescriptionInfo{
+    grid-area: 1/5/2/9;
+}
+#big {
+    grid-area: 1/1/4/5;
+    height: 190px; 
+    width: fit-content;
+    margin-bottom: 10px; 
+    display: block;
+    background-size: cover;
+    margin: auto
+}
+#thumbs{
+    grid-area: 6/1/7/5;
+    margin: auto
+}
+#thumbs a img {
+    height: 35px;
+}
+a {
+    text-decoration: none;
 }

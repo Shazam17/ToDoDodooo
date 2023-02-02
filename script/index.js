@@ -41,12 +41,12 @@ function sendRequest(method, url, body = null) {
 
 function changeItem(h) {
     document.getElementById('Description').style.backgroundColor = "rgba(102, 51, 153, 0.297)";
-    document.getElementById('Description').style.gridArea = h + 2 + '/2/' + (h + 5) + '/3';
+    document.getElementById('Description').style.gridArea = h + 2 + '/2/' + (h + 11) + '/3';
 }
 
 function rechangeItem() {
     document.getElementById('Description').style.backgroundColor = "white";
-    document.getElementById('Description').style.gridArea = '3/2/6/3';
+    document.getElementById('Description').style.gridArea = '3/2/12/3';
 }
 
 function startAddListItem(title) {
@@ -76,6 +76,20 @@ function addListItem(title,Quantity) {
         targetDiv.append(newDiv);
     }
 }
+
+function addListDescription(title,Quantity) {
+        let targetDiv = document.querySelector(".listObjectDescription");
+        let newDiv = document.createElement("div");
+        newDiv.className = 'listObject';
+        newDiv.onmouseover = () => changeItem(i + 1);
+        // newDiv.onmouseout = () => rechangeItem(i + 1);
+        newDiv.draggable = 'true';
+        newDiv.innerHTML = '<div class="listObjectDescription" id="Description"> <img src="https://i.dummyjson.com/data/products/26/1.jpg" id="big"> <div id="thumbs"> <a href="https://i.dummyjson.com/data/products/26/1.jpg"> <img src="https://i.dummyjson.com/data/products/26/1.jpg"> </a> <a href="https://i.dummyjson.com/data/products/26/2.jpg"> <img src="https://i.dummyjson.com/data/products/26/2.jpg"> </a> <a href="https://i.dummyjson.com/data/products/26/3.jpg"> <img src="https://i.dummyjson.com/data/products/26/3.jpg"> <a href="https://i.dummyjson.com/data/products/26/4.jpg"> <img src="https://i.dummyjson.com/data/products/26/4.jpg"> <a href="https://i.dummyjson.com/data/products/26/5.jpg"> <img src="https://i.dummyjson.com/data/products/26/5.jpg"> </a> </div> <div class="mainDescriptionInfo"> <div class="" id="">id: 26</div> <div class="" id="">title: "Plant Hanger For Home"</div> <div class="" id="">description: "Boho Decor Plant Hanger For Home Wall Decoration Macrame Wall Hanging Shelf"</div> <div class="" id="">price: 41</div> <div class="" id="">discountPercentage: 17.86</div> <div class="" id="">rating: 4.08</div> <div class="" id="">stock: 131</div> <div class="" id="">brand: "Boho Decor"</div> <div class="" id="">category: "home-decoration"</div> </div> </div>';
+        targetDiv.append(newDiv);
+    }
+}
+
+
 
 function removeListItems() {
     const removeItems = document.querySelectorAll(".listObject");
@@ -110,7 +124,15 @@ function handlerDrag(event) {
 
 }
 
+var thumbs = document.querySelectorAll('#thumbs > a');
+var big = document.getElementById('big');
 
+for (var i = 0; i < thumbs.length; i++) {
+    thumbs[i].addEventListener('click', function(e) {
+        e.preventDefault();
+        big.src = this.href;
+    });
+}
 
 
 
