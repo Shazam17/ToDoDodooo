@@ -47,7 +47,7 @@ function addRequestDescription(n) {
         const stock = [];
         const brand = [];
         const category = [];
-        const images = [];n
+        const images = [];
             id[n] = data.products[n].id;
             title[n] = data.products[n].title; 
             description[n] = data.products[n].description;
@@ -64,7 +64,6 @@ function addRequestDescription(n) {
         for (let k = removeDiv.length; k>0;k--) {
             removeDiv[k-1].remove();
         }
-        
             let targetDiv = document.querySelector(".mainContainer");
             let newDiv = document.createElement("div");
             newDiv.className = 'listObjectDescription';
@@ -77,7 +76,6 @@ function addRequestDescription(n) {
         dataBase.catch(err => console.log(err))
     })
 }
-
 
 function sendRequest(method, url, body = null) {
     return fetch(url).then(response => {
@@ -126,9 +124,6 @@ function addListItem(title,Quantity) {
     }
 }
 
-
-
-
 function removeListItems() {
     const removeItems = document.querySelectorAll(".listObject");
     for (let k = removeItems.length; k>0;k--) {        
@@ -162,63 +157,15 @@ function handlerDrag(event) {
 
 }
 
-var thumbs = document.querySelectorAll('#thumbs > a');
+const thumbs = document.querySelectorAll('#thumbs > a');
 var big = document.getElementById('big');
-
 for (var i = 0; i < thumbs.length; i++) {
     thumbs[i].addEventListener('click', function(e) {
         e.preventDefault();
         big.src = this.href;
+
+        console.log(i);
+
     });
 }
-
-// function upper(e) {
-//     console.log(e);
-//     const a = e.parentElement.previousSibling;
-//     const b = e.parentElement;
-//     const parent = document.querySelector('.origin')
-//     console.log('qwerty');
-//     console.log(e.parentElement);
-//     console.log(b);
-//     parent.insertBefore(b, a)
-// }
-// function downer(e) {
-//     const a = e.parentElement;
-//     const b = e.parentElement.nextSibling;
-//     const parent = document.querySelector('.origin')
-//     parent.insertBefore(b, a)
-// }
-// function remover(e) {
-//     const remm = e.parentElement;
-//     remm.remove();
-// }
-
-// function createNode(element) {
-//     return document.createElement(element);
-// }
-
-// function append(parent, el) {
-//   return parent.appendChild(el);
-// }
-
-// const ul = document.getElementById('authors');
-// const url = 'https://randomuser.me/api/?results=10';
-
-// fetch(url)
-// .then((resp) => resp.json())
-// .then(function(data) {
-//   let authors = data.results;
-//   return authors.map(function(author) {
-//     let li = createNode('li');
-//     let img = createNode('img');
-//     let span = createNode('span');
-//     img.src = author.picture.medium;
-//     span.innerHTML = `${author.name.first} ${author.name.last}`;
-//     append(li, img);
-//     append(li, span);
-//     append(ul, li);
-//   })
-// })
-// .catch(function(error) {
-//   console.log(error);
-// });
+//sort of everything 

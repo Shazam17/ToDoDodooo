@@ -60,7 +60,8 @@
 .listObjectDescription {
     display: grid;
     grid-template-columns: repeat(8,1fr);
-    grid-template-rows: repeat(8, 40px);
+    grid-template-rows: repeat(7, 40px);
+    gap:10px;
     border: 3px solid rebeccapurple;
     padding: 15px;
     grid-area: 3/2/12/3;
@@ -73,14 +74,16 @@
 }
 .imgContainer{
     display: grid;
+    
 }
 .mainDescriptionInfo{
-    grid-area: 1/5/2/9;
+    grid-area: 2/5/6/9;
 }
 #big {
-    grid-area: 1/1/4/5;
-    height: 190px; 
-    width: fit-content;
+    grid-area: 1/1/6/5;
+    width: 100%;
+    height: 100%;
+    object-fit:scale-down;
     margin-bottom: 10px; 
     display: block;
     background-size: cover;
@@ -88,10 +91,14 @@
 }
 #thumbs{
     grid-area: 6/1/7/5;
-    margin: auto
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(5,40px);
 }
 #thumbs a img {
-    height: 35px;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 a {
     text-decoration: none;
