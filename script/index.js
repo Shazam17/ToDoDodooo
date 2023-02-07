@@ -5,8 +5,7 @@ parent.onmouseover = function (e) {
     var e = e || event;
     var target = e.target || e.srcElement;
     for(var i = 0; i < parent.children.length; i++) {
-        if(parent.children[i] == target) return console.log(i);
-        changeItem(i);
+        if(parent.children[i] == target) console.log(i); return i;
     }
 }
 
@@ -70,7 +69,7 @@ function addRequestDescription(n) {
         category[n] = data.products[n].category;
         images[n] = data.products[n].images;
 
-        // Легкий вариант спрятать пустой элемент
+        // Легкий вариант спрятать пустую картинку
         for (let i = 0; i < 5; i++) {
             if (images[n][i] == undefined) { images[n][i] = images[n][0]; }
         }
@@ -140,9 +139,6 @@ function addListItem(title, Quantity) {
         newDiv.className = 'listObject';
         newDiv.id = i;
         newDiv.onmouseover = () => addRequestDescription(i);
-
-
-        // newDiv.onmouseout = () => rechangeItem(i + 1);
         newDiv.draggable = 'true';
         newDiv.innerHTML = '<a>' + title[i] + '</a>';
         targetDiv.append(newDiv);
