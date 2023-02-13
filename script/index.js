@@ -1,4 +1,5 @@
-const requestURL = "https://dummyjson.com/products";
+const requestURL = 'qqq';
+let Quantity = 0;
 let listPlace = 1;
 //Счетчик объектов для перемещения description
 var parent = document.getElementsByClassName("list")[0];
@@ -11,7 +12,7 @@ parent.onmouseover = function (e) {
 }
 //Отдельная ф-ия для стартового запроса
 function request() {
-    let dataBase = sendRequest('GET', requestURL);
+    let dataBase = sendRequest('GET', 10);
 
     dataBase.then(data => {
         const title = [];
@@ -26,9 +27,8 @@ request();
 //Ф-я для создания заданного кол-ва элементов
 function addRequest() {
     let dataBase = sendRequest('GET', requestURL);
-    let Quantity = document.getElementById('Quant').value;
-    if (Quantity > 30) { alert("Let me number lower than 30") }
-    else {
+    Quantity = document.getElementById('Quant').value;
+    document.querySelector('.mainContainer').style.gridTemplateRows='80px repeat(' + Quantity+2 + ', 40px)';
         dataBase.then(data => {
             const title = [];
             for (let i = 0; i < Quantity; i++) {
@@ -37,7 +37,6 @@ function addRequest() {
             addListItem(title, Quantity);
             dataBase.catch(err => console.log(err))
         })
-    }
 }
 
 function addSortedRequest(){
@@ -94,10 +93,17 @@ function addRequestDescription(n) {
     })
 }
 //Запрос на сервер
-function sendRequest(method, url, body = null) {
-    return fetch(url).then(response => {
+function sendRequest(method, quantity, body = null) {
+    if(Quantity != 0){
+    return fetch('https://dummyjson.com/products?limit='+Quantity).then(response => {
         return response.json()
     })
+    }
+    else{
+        return fetch('https://dummyjson.com/products?limit='+10).then(response => {
+        return response.json()
+    })
+    }
 }
 //Перемещение Description
 function changeItem(h) {
